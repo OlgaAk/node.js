@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calender</title>
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+   <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+</head>
+
+<body>
+<div id=top_menu>
+<h2>Календарь занятий<h2>
+</div>
+    <div id='wrapper'> 
+        <div id='header'>
+            <button id=arrow-left><</button>
+             <h1>Календарь</h1>
+              <button id=arrow-right>></button>
+         </div>
+         <div id='month'>
+            <div id='calender'>             
+            </div>
+        </div>
+    </div>
+
+<div id=divForm>
+<p id="form_title">Добавить курс занятий</p>
+        <form id="frm">
+         Предмет<input type="text" id="courseName" required><br>
+            Преподаватеь<input type="text" id="teacherName" required><br>
+            Дата начала<input type="date" id="courseStrtDt" required><br>
+            Дата окончания<input type="date" id="courseEndtDt" required><br>
+           <div id="wd"> Дни недели
+            <p> <input class="weekDaysBox" type="checkbox" name="checkbox" value="1"><lable for="weekDaysBox">Понедельник</lable></p>
+            <p><input class="weekDaysBox" type="checkbox" name="checkbox" value="2"><lable for="weekDaysBox">Вторник</lable></p>
+           <p> <input class="weekDaysBox" type="checkbox" name="checkbox"  value="3"><lable for="weekDaysBox">Среда</lable></p>
+            <p><input class="weekDaysBox" type="checkbox" name="checkbox" value="4"><lable for="weekDaysBox">Четверг</lable></p>
+            <p><input class="weekDaysBox" type="checkbox" name="checkbox" value="5"><lable for="weekDaysBox">Пятница</lable></p>
+            <p><input class="weekDaysBox" type="checkbox" name="checkbox"  value="6"><lable for="weekDaysBox">Суббота</lable></p>
+            <p> <input class="weekDaysBox" type="checkbox" name="checkbox"  value="7"><lable for="weekDaysBox">Воскресенье</lable></p>
+             </div><br>
+            <p>Цвет<input type="color" id="courseColor" value="#ff0000" required/>
+            <input type="submit" id="submitBtn" value="Добавить"> </p>
+             <!--<button id=closeButton>x</button>-->
+    </form>
+</div>
+<p>Test mysql emit </p>
+<div id="test">
+
+</div>
+ 
+<script src="/javascripts/home.js"></script>  
+
+</body>
+</html>

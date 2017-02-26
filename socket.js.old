@@ -1,0 +1,50 @@
+
+
+
+var socket = io.connect('http://localhost');
+
+    socket.on('initial events', function(data){
+        var html = ''
+        for (var i = 0; i < data.length; i++){
+    
+           // html += '<li>' + data[i].note + '</li>'
+        }
+      //  $('#events').html(html)
+    })
+ 
+  
+    socket.on('new event', function(data){
+    //    $('#notes').append('<li>' + data.note + '</li>')
+    })
+ 
+
+    socket.on('users connected', function(data){
+        $('#usersConnected').html('Users connected: ' + data)
+    })
+ 
+ 
+    $('#submitBtn').click(function(){
+        var newEvent = '';
+        socket.emit('new event', {event: newEvent})
+        socket.emit('add_event_server', { id: 123 , name: 'Делаем лабу', dt-start: '22.02.2017' });
+    })
+
+
+  $('#submitBtn').click(function (e) {
+  console.log('click');
+            
+             socket.emit('add_event_server', { 'title': formCrs, 'name': formCrsTch, 'dt-start': formCrsStrtDt, 'dt_end': formCrsEndtDt, 'color': formCrsClr });
+e.preventDefault();
+ } )
+
+
+       socket.emit('add_event_server', { 'title': lname, 'name': teacher, 'dt-start': dtStart, 'dt_end': dtEnd, 'color': color });
+            e.preventDefault();
+
+
+             
+  function submitClick () {
+            console.log('click');
+            
+             socket.emit('add_event_server', {$('#courseName').val(), $('#teacherName').val()});
+             }

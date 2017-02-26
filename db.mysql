@@ -1,0 +1,37 @@
+use my_db;
+
+create table if not exists events 
+(id_event int(20) not null auto_increment,
+id_group  int(20) DEFAULT '1',
+name char(20) not null,
+color char(20) not null,
+primary key(id_event)
+);
+
+
+ alter table events add title varchar(20);
+
+ alter table events add dt_start varchar(20);
+
+  alter table events add dt_end varchar(20);
+
+ insert into events set name="Dasha", title="CSS", color="yellow";
+ update events set color='yellow' where id_event='1';
+
+ update events set dt_start='1.02.2017' where id_event='1';
+
+ update events set dt_end='18.02.2017' where id_event='1';
+
+
+ 
+ update events set dt_start='01.02.2017' where id_event='1';
+
+
+ update events set dt_start='2017-02-01' where id_event='1';
+
+
+
+ update events set dt_end='2017-02-18' where id_event='1';
+
+
+
