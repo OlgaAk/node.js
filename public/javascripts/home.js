@@ -106,27 +106,39 @@ Calender.prototype.getSelectedDays = function(){
     console.log(+this.prepod.dtStartMonth-1, currentMonth, +this.prepod.dtEndMonth-1, this.prepod.name)
 if (+this.prepod.dtStartMonth-1 == currentMonth) {
             for (var i = 1; i <= daysInCurrentMonth; i++) {
-            var thatDate = new Date (currentYear, currentMonth, i);
+            var thatDate = new Date (currentYear, currentMonth-1, i);
                 var thatDateofWeek = thatDate.getDay();
         for (var counter=0; counter < this.prepod.lessonDays.length; counter++)  {
-                if (+this.prepod.dtEndMonth == currentMonth) {
+                if (+this.prepod.dtEndMonth-1 == currentMonth) {
                                
                         if (+this.prepod.dtEndDay >= i && i >= +this.prepod.dtStartDay && thatDateofWeek == this.prepod.lessonDays[counter])  {  
                         this.fillSelectedDays(i);            
                         } 
                             } else { console.log(this.prepod.name, this.prepod.lessonDays, this.prepod.lessonDays[counter], thatDateofWeek); 
                                
-                                if ( i <= +this.prepod.dtEndDay && thatDateofWeek == this.prepod.lessonDays[counter])  {  
+                                if (i >= +this.prepod.dtStartDay && thatDateofWeek == this.prepod.lessonDays[counter])  {  
                                         this.fillSelectedDays(i);                                         
      } } } } } 
 
-else if(+this.prepod.dtStartMonth-1 < currentMonth && +this.prepod.dtEndMonth-1 >= currentMonth) {
+else if(+this.prepod.dtStartMonth-1 < currentMonth && +this.prepod.dtEndMonth-1 == currentMonth) {
      for (var i = 1; i <= daysInCurrentMonth; i++) {
-            var thatDate = new Date (currentYear, currentMonth, i);
+            var thatDate = new Date (currentYear, currentMonth-1, i);
                 var thatDateofWeek = thatDate.getDay();
         for (var counter=0; counter < this.prepod.lessonDays.length; counter++)  {
                                        
                         if (+this.prepod.dtEndDay >= i && thatDateofWeek == this.prepod.lessonDays[counter])  {  
+                        this.fillSelectedDays(i);            
+                        } 
+                             else { console.log(this.prepod.name, this.prepod.lessonDays, this.prepod.lessonDays[counter], thatDateofWeek); 
+                             
+}}}}
+else if(+this.prepod.dtStartMonth-1 < currentMonth && +this.prepod.dtEndMonth-1 > currentMonth) {
+     for (var i = 1; i <= daysInCurrentMonth; i++) {
+            var thatDate = new Date (currentYear, currentMonth-1, i);
+                var thatDateofWeek = thatDate.getDay();
+        for (var counter=0; counter < this.prepod.lessonDays.length; counter++)  {
+                                       
+                        if ( thatDateofWeek == this.prepod.lessonDays[counter])  {  
                         this.fillSelectedDays(i);            
                         } 
                              else { console.log(this.prepod.name, this.prepod.lessonDays, this.prepod.lessonDays[counter], thatDateofWeek); 
