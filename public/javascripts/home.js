@@ -13,7 +13,7 @@ var nextMonth = currentMonth + 1;
 var lastMonthYear = currentDate.getFullYear();
 
 function daysInMonth(month,year) {
-    return new Date(year, month, 0).getDate();
+    return new Date(year, month+1, 0).getDate();
 }
 console.log(currentDate);
 
@@ -103,7 +103,7 @@ Calender.prototype.fillSelectedDays = function(i) {
 // Генерируем расписание препода/курса
 
 Calender.prototype.getSelectedDays = function(){
-    console.log(+this.prepod.dtStartMonth-1, currentMonth, this.prepod.name)
+    console.log(+this.prepod.dtStartMonth-1, currentMonth, +this.prepod.dtEndMonth-1, this.prepod.name)
 if (+this.prepod.dtStartMonth-1 == currentMonth) {
             for (var i = 1; i <= daysInCurrentMonth; i++) {
             var thatDate = new Date (currentYear, currentMonth, i);
@@ -120,7 +120,7 @@ if (+this.prepod.dtStartMonth-1 == currentMonth) {
                                         this.fillSelectedDays(i);                                         
      } } } } } 
 
-else if(+this.prepod.dtStartMonth < currentMonth && +this.prepod.dtEndMonth == currentMonth) {
+else if(+this.prepod.dtStartMonth-1 < currentMonth && +this.prepod.dtEndMonth-1 >= currentMonth) {
      for (var i = 1; i <= daysInCurrentMonth; i++) {
             var thatDate = new Date (currentYear, currentMonth, i);
                 var thatDateofWeek = thatDate.getDay();
@@ -131,7 +131,11 @@ else if(+this.prepod.dtStartMonth < currentMonth && +this.prepod.dtEndMonth == c
                         } 
                              else { console.log(this.prepod.name, this.prepod.lessonDays, this.prepod.lessonDays[counter], thatDateofWeek); 
                              
-}}}}}
+}}}}
+else {
+    console.log('this prepod`s course doesn cover this month');
+}
+}
 
 
 findMonday(currentMonth, currentYear); //создаем календарь на текущий месяц
