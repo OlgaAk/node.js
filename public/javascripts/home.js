@@ -21,6 +21,7 @@ var daysInCurrentMonth = daysInMonth(currentMonth, currentYear);
 
 console.log(daysInCurrentMonth);
 
+
 function Calender(prepod) {
     this.prepod = prepod;
     this.allLessonDays = [];
@@ -92,7 +93,10 @@ Calender.prototype.fillSelectedDays = function(i) {
     textDiv.innerHTML = this.prepod.name + '<br>' + this.prepod.nameBlock;
     cDaySelected.appendChild(textDiv);
     var closeButton = document.createElement('button');
-    closeButton.addEventListener('click', function() {cDaySelected.removeChild(textDiv); cDaySelected.style.background = 'white'; });
+    closeButton.addEventListener('click', function() {cDaySelected.removeChild(textDiv); cDaySelected.style.background = 'white';
+
+
+ });
     var closeSign = document.createTextNode('x');
     closeButton.appendChild(closeSign);
     closeButton.className += " closeBtn";
@@ -157,7 +161,10 @@ findMonday(currentMonth, currentYear); //создаем календарь на 
 
 // Обработка новых данных формы для отправки на сервер в базу данных
 
-document.getElementById('submitBtn').onclick = function() { 
+var variableForCalender2
+
+document.getElementById('submitBtn').onclick = function(e) { 
+ e.preventDefault();
 alert('Нажата кнопка'); 
 var dt_start = document.getElementById('courseStrtDt').value, 
 dt_end = document.getElementById('courseEndtDt').value, 
@@ -168,10 +175,17 @@ var weekDays = [];
 $(".weekDaysBox:checked").each(function() {
     weekDays.push(this.value);
 });
-weekDays.toString();
+var weekDaysString = weekDays.toString();
+
+console.log("trying to get new record inserted in html");
+var prepod2 = new Prepod(name, dt_start, dt_end, title, color);  
+console.log(weekDays, weekDaysString);          
+prepod2.lessonDays = weekDaysString.split(',');
+console.log(prepod2, "hi i am prepod 2");
+var calender2 = new Calender(prepod2); 
+calender2.getSelectedDays();  
 
 
-console.log(weekDays)
 
 socket.emit('add_event', { 
 'dt_start': dt_start, 
@@ -181,6 +195,8 @@ socket.emit('add_event', {
 'title': title,
 'weekDays': weekDays
 }); 
+variableForCalender2 = calender2;
+return variableForCalender2;
 } 
 
 // Обработка данных из базы с сервера для генерацииив календарь 
@@ -193,7 +209,7 @@ socket.on('initial events', function (data){
    
     x = data;
         for (var i = 0; i < data.length; i++){
-            html += '<li>' + 'Start' + data[i].dt_start + 'End' + data[i].dt_end + data[i].name + data[i].title + data[i].color + '</li>';
+            // html += '<li>' + 'Start' + data[i].dt_start + 'End' + data[i].dt_end + data[i].name + data[i].title + data[i].color + '</li>';
             var prepod = new Prepod(data[i].name, data[i].dt_start, data[i].dt_end, data[i].title, data[i].color);  // вопрос: как задавать массив в новом объекте?
             var weekDaysString = data[i].weekDays;            
             prepod.lessonDays = weekDaysString.split(',');
@@ -202,7 +218,7 @@ socket.on('initial events', function (data){
             calender1.getSelectedDays();    
                           
         }
-        $('#test').html(html)
+        // $('#test').html(html)
        
         return x
     })
@@ -240,12 +256,14 @@ function createLastMonthCalender () {
     monthTitle.innerHTML = months[currentMonth] + " " + currentYear + " год";
    
        console.log("socket on!")
+       if(variableForCalender2) {variableForCalender2.getSelectedDays()  }
           for (var i = 0; i < x.length; i++){
             var prepod = new Prepod(x[i].name, x[i].dt_start, x[i].dt_end, x[i].title, x[i].color);  // вопрос: как задавать массив в новом объекте?
             var weekDaysString = x[i].weekDays;            
             prepod.lessonDays = weekDaysString.split(',');
             var calender1 = new Calender(prepod); 
-            calender1.getSelectedDays();                    
+            calender1.getSelectedDays();     
+                   
  } }
 
 // пролистывание вперед
@@ -272,6 +290,7 @@ if (currentMonth == 11) {
 console.log("I am here before the soket");
      
        console.log(x);
+        if(variableForCalender2) {variableForCalender2.getSelectedDays()  }
           for (var i = 0; i < x.length; i++){
             var prepod = new Prepod(x[i].name, x[i].dt_start, x[i].dt_end, x[i].title, x[i].color);  // вопрос: как задавать массив в новом объекте?
             var weekDaysString = x[i].weekDays;            
